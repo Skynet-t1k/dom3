@@ -11,13 +11,27 @@
 
 button {
     margin: 30px 10px;
+    width: 200px;   
+    height: 100px;
+    border-radius: 50px;
+    font-size: 2rem;
+}
+
+button:hover{
+    background-color: black;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+h1{
+    font-size: 5rem;
 }
 
 #inputSeconds{
-    width: 200px;
+    width: 300px;
     height: 100px;
     text-align: center;
-    font-size: 5rem;
+    font-size: 2rem;
 
 }
 

@@ -2,47 +2,38 @@
 
 const inputSeconds = document.querySelector('#inputSeconds');
 const start = document.querySelector('#start');
-const pause = document.querySelector('#pause');
+const stop = document.querySelector('#stop');
 const reset = document.querySelector('#reset');
 const displayTimer = document.querySelector('#displayTimer');
 let seconds;
 let interval;
-let startStop = true;
-let avvia = true;
+let remainingSeconds = 0;
+
 
 start.addEventListener('click', ()=>{
+    clearInterval(interval);
     seconds = inputSeconds.value;
-    inputSeconds.value = "";
-    if (avvia){
-        avvia=false;
-        interval =  setInterval(() => { 
+      if(remainingSeconds > 0){
+        seconds = remainingSeconds;
+        }
+    interval = setInterval(() => {
         displayTimer.innerHTML = seconds;
         seconds--;
-        }, 1000);
-    }
-           
+        if(seconds < 0){
+            clearInterval(interval);
+        }
+    }, 1000);
+
 });
 
-pause.addEventListener('click', ()=>{
-    if(startStop && !avvia){
-    startStop=false;
-    pause.innerHTML = "Resume";    
+stop.addEventListener('click', ()=>{
     clearInterval(interval);
-    }else if(!startStop && !avvia){
-    startStop=true;
-    pause.innerHTML = "Pausa"    
-    seconds = displayTimer.innerHTML;
-    interval =  setInterval(() => { 
-    displayTimer.innerHTML = seconds;
-    seconds--;
-    }, 1000);
-    }
-
+    remainingSeconds = displayTimer.innerHTML;
 });
 
 reset.addEventListener('click', ()=>{
     clearInterval(interval);
-    displayTimer.innerHTML = "0";
-    avvia=true;
+    inputSeconds.value = "";
+    displayTimer.innerHTML = "";
+    remainingSeconds = 0;
 });
-
